@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Book\BookPage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,7 +12,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/books', BookPage::class, function () {
+        return view('livewire.book.book-page');
+    })->name('books');
 });
