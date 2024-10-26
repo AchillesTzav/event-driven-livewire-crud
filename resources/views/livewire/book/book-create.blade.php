@@ -3,9 +3,31 @@
         <x-slot name="title">Create Book</x-slot>
 
         <x-slot name="content">
-            <div>
-                Edw tha mpei h forma
-            </div>
+            <form>
+                <div>
+                    <x-label for="title">Book title</x-label>
+                    <x-input type="text" id="title" wire:model.live="form.title"></x-input>
+                    @error('form.title')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+
+                <div>
+                    <x-label for="description">Book description</x-label>
+                    <x-input type="text" id="description" wire:model.live="form.description"></x-input>
+                    @error('form.description')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                
+                <div>
+                    <livewire:book.book-upload-image />
+                </div>
+                
+            </form>
+
         </x-slot>
 
         <x-slot name="footer">

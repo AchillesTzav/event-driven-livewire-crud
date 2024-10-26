@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class BookTable extends Component
 {
 
-    protected $listeners = [ 'refreshTable' => '$refresh'];
+    protected $listeners = [ 'refresh-table-event' => '$refresh'];
 
     public function destroy($id) 
     {

@@ -4,6 +4,7 @@
         <thead>
             <tr>
                 <th>id</th>
+                <th>image</th>
                 <th>title</th>
                 <th>description</th>
                 <th>actions</th>
@@ -13,6 +14,7 @@
             @foreach ($books as $book)
             <tr>
                 <td>{{$book->id}}</td>
+                <td><img class="w-16 h-16" src="{{$book->images()->pluck('image_path')->first()}}" alt=""></td>
                 <td>{{$book->title}}</td>
                 <td>{{$book->description}}</td>
                 <td>
