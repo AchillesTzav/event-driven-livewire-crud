@@ -4,28 +4,30 @@
 
         <x-slot name="content">
             <form>
-                <div>
-                    <x-label for="title">Book title</x-label>
-                    <x-input type="text" id="title" wire:model.live="form.title"></x-input>
-                    @error('form.title')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                </div>
+                <div class="flex flex-col [&>div]:p-2 items-center">
+                    <div>
+                        <x-label for="title">Book title</x-label>
+                        <x-input type="text" id="title" wire:model.live="form.title"></x-input>
+                        @error('form.title')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
 
 
-                <div>
-                    <x-label for="description">Book description</x-label>
-                    <x-input type="text" id="description" wire:model.live="form.description"></x-input>
-                    @error('form.description')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
+                    <div>
+                        <x-label for="description">Book description</x-label>
+                        <x-input type="text" id="description" wire:model.live="form.description"></x-input>
+                        @error('form.description')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+
+                    <div>
+                        <livewire:book.book-upload-image />
+                    </div>
                 </div>
 
-                
-                <div>
-                    <livewire:book.book-upload-image />
-                </div>
-                
             </form>
 
         </x-slot>
