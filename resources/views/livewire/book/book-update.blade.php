@@ -1,6 +1,6 @@
 <div>
     <x-custom.modal>
-        <x-slot name="title">Create Book</x-slot>
+        <x-slot name="title">Update Book</x-slot>
 
         <x-slot name="content">
             <form>
@@ -15,8 +15,6 @@
                         <span class="error">{{ $message }}</span>
                     @enderror
 
-
-
                     <div>
                         <x-label for="description">Book description</x-label>
                         <textarea class="rounded" type="text" id="description" wire:model.live="form.description"></textarea>
@@ -27,7 +25,9 @@
                         <span class="error">{{ $message }}</span>
                     @enderror
 
-
+                    <div>
+                    <img class="w-16 h-16" src="{{$form->stored_image_path}}" alt="">
+                    </div>
 
                     <div>
                         <livewire:book.book-upload-image />
@@ -40,7 +40,7 @@
 
         <x-slot name="footer">
             <div>
-                <x-button wire:click='save' type="submit">save</x-button>
+                <x-button wire:click='save' type="submit">update</x-button>
 
                 <x-secondary-button wire:click="$parent.close_modal">
                     Cancel

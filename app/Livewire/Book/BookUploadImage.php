@@ -14,22 +14,23 @@ class BookUploadImage extends Component
 {
     use WithFileUploads;
 
-    
+
     #[Validate("nullable|image|mimes:jpeg,png,jpg|max:1024")]
     public $photo;
 
-    public $placeholder='photos/idiot.jpg';
+    public $placeholder='https://placehold.co/600x400';
 
     #[On('save-photo-event')]
     public function save_photo($book_id)
     {
         $this->validate();
 
-        if ($this->photo) 
+
+        if ($this->photo )
         {
             $image_path = $this->photo->store('photos');
-        } 
-        else 
+        }
+        else
         {
             $image_path = $this->placeholder;
         }
@@ -42,6 +43,11 @@ class BookUploadImage extends Component
         ]);
     }
 
+    #[On('update-photo-event')]
+    public function update_photo($book_id)
+    {
+        //insert update logic
+    }
 
     public function render()
     {

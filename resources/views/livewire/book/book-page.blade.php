@@ -17,7 +17,7 @@
                 @endif
 
                 @if ($is_update)
-                  //render book-update component
+                  <livewire:book.book-update :id="$book_id" />
                 @endif
 
                 @if ($is_show)

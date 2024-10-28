@@ -5,15 +5,18 @@ namespace App\Livewire\Book;
 use Livewire\Component;
 use App\Models\Book;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
 
 class BookTable extends Component
 {
 
     protected $listeners = [ 'refresh-table-event' => '$refresh'];
 
-    public function destroy($id) 
+    public function destroy($id)
     {
-        Book::findOrFail($id)->delete();
+        $book = Book::findOrFail($id);
+        Storage::delete($book->images->pluck('image_path')->first());
+        $book->delete();
     }
 
     public function edit($id)

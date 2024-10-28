@@ -15,7 +15,7 @@ class BookShow extends Component
     {
         $book = Book::findOrFail($id);
 
-        $form_data = $this->form->setBook($book);
+        $this->form->setBook($book);
     }
 
 
