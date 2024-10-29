@@ -2,7 +2,7 @@
     
     <table>
         <thead>
-            <tr>
+            <tr class="[&>th]:p-2">
                 <th>id</th>
                 <th>image</th>
                 <th>title</th>
@@ -12,7 +12,7 @@
         </thead>
         <tbody>
             @foreach ($books as $book)
-            <tr>
+            <tr class="[&>td]:p-2">
                 <td>{{$book->id}}</td>
                 <td><img class="w-16 h-16" src="{{$book->images()->pluck('image_path')->first()}}" alt=""></td>
                 <td>{{$book->title}}</td>

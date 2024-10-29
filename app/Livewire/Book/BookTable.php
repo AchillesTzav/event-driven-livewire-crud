@@ -15,7 +15,10 @@ class BookTable extends Component
     public function destroy($id)
     {
         $book = Book::findOrFail($id);
-        Storage::delete($book->images->pluck('image_path')->first());
+        $image_path = $book->images->pluck('image_path')->first();
+        if (file_exists($image_path)) {
+            Storage::delete($image_path);
+        }
         $book->delete();
     }
 

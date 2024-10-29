@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Storage;
+use Exception;
 
 class BookUploadImage extends Component
 {
@@ -20,18 +21,19 @@ class BookUploadImage extends Component
 
     public $placeholder='https://placehold.co/600x400';
 
+
     #[On('save-photo-event')]
     public function save_photo($book_id)
     {
-        $this->validate();
+        try {
+            $this->validate();
 
-
-        if ($this->photo )
-        {
-            $image_path = $this->photo->store('photos');
-        }
-        else
-        {
+            if ($this->photo && $this->photo->isValid()) {
+                $image_path = $this->photo->store('photos');
+            } else {
+                $image_path = $this->placeholder;
+            }
+        } catch (Exception $e) {
             $image_path = $this->placeholder;
         }
 
@@ -46,11 +48,50 @@ class BookUploadImage extends Component
     #[On('update-photo-event')]
     public function update_photo($book_id)
     {
-        //insert update logic
+        $book = Book::findOrFail($book_id);
+        
+        try {
+            $this->validate();
+
+            if ($this->photo ) {
+                $image_path = $this->photo->store('photos');
+            } else {
+                $image_path = $book->images()->pluck('image_path')->first();
+            }
+        } catch (Exception $e) {
+            $image_path = $book->images()->pluck('image_path')->first();
+        }
+
+
+        $book->images()->update([
+            'book_id' => $book_id,
+            'image_path' => $image_path,
+        ]);
     }
+
+    #[On('remove-image-event')]
+    public function remove_image($book_id) 
+    {
+        $book = Book::findOrFail($book_id);
+
+        $image_path = $book->images()->pluck('image_path')->first();
+
+        $book->images()->update([
+            'book_id' => $book_id,
+            'image_path' => $this->placeholder,
+        ]);
+
+        Storage::delete($image_path);
+
+        $this->dispatch('refresh-table-event'); 
+
+
+    }
+
 
     public function render()
     {
         return view('livewire.book.book-upload-image');
     }
 }
+

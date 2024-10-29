@@ -26,7 +26,11 @@
                     @enderror
 
                     <div>
-                    <img class="w-16 h-16" src="{{$form->stored_image_path}}" alt="">
+                        <img class="w-16 h-16" src="{{$form->stored_image_path}}" alt="">
+                    </div>
+
+                    <div>
+                    <x-button wire:click.prevent="remove_image({{ $this->form->book->id }})">Remove</x-button>
                     </div>
 
                     <div>
@@ -40,7 +44,7 @@
 
         <x-slot name="footer">
             <div>
-                <x-button wire:click='save' type="submit">update</x-button>
+                <x-button wire:click="update" type="submit">update</x-button>
 
                 <x-secondary-button wire:click="$parent.close_modal">
                     Cancel
