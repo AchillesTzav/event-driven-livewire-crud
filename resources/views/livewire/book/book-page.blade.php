@@ -8,9 +8,13 @@
   <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-4">
-                <div class="p-8 ">
-                    <x-button wire:click="$set('is_create', true)">Create</x-button>
-                </div>
+
+              @include('components.custom.flash-messages')
+
+              <div class="p-8 ">
+                      <x-button wire:click="$set('is_create', true)">Create</x-button>
+              </div>
+
 
                 @if ($is_create)
                   <livewire:book.book-create/>

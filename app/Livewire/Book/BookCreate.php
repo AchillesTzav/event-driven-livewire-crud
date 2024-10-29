@@ -25,6 +25,8 @@ class BookCreate extends Component
 
         $this->dispatch('close-modal-event');
 
+        $this->dispatch('flash-message-event', $status="create", $action="Book successfully created!");
+
         $this->dispatch('refresh-table-event');
     }
 

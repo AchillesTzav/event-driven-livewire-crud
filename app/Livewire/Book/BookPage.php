@@ -47,6 +47,12 @@ class BookPage extends Component
         $this->is_show = false;
     }
 
+    #[On('flash-message-event')]
+    public function flash_message($status, $action)
+    {
+        session()->flash($status, $action);
+    }
+
 
 
     public function render()

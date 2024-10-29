@@ -14,7 +14,7 @@
             @foreach ($books as $book)
             <tr class="[&>td]:p-2">
                 <td>{{$book->id}}</td>
-                <td><img class="w-16 h-16" src="{{$book->images()->pluck('image_path')->first()}}" alt=""></td>
+                <td><img class="w-16 h-16 rounded" src="{{$book->images()->pluck('image_path')->first()}}" alt=""></td>
                 <td>{{$book->title}}</td>
                 <td>{{$book->description}}</td>
                 <td>

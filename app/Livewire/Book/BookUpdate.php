@@ -29,6 +29,8 @@ class BookUpdate extends Component
 
         $this->dispatch('close-modal-event');
 
+        $this->dispatch('flash-message-event', $status="update", $action="Book successfully updated!");
+
         $this->dispatch('refresh-table-event');
     }
 
